@@ -6,14 +6,32 @@
                 <!-- Logo -->
                 <div class="flex-shrink-0 flex items-center">
                     <a href="{{ route('dashboard') }}">
-                        <x-jet-application-mark class="block h-9 w-auto" />
+                        <lottie-player src="https://assets4.lottiefiles.com/packages/lf20_yfzqf50z.json" background="transparent" speed="1" style="width: 80px; height: 80px;" autoplay></lottie-player>
                     </a>
                 </div>
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
+                        {{ __('Inicio') }}
+                    </x-jet-nav-link>
+                </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-jet-nav-link href="{{ route('usuarios.index') }}" :active="request()->routeIs('usuarios.index')">
+                        {{ __('Usuarios') }}
+                    </x-jet-nav-link>
+                </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-jet-nav-link href="{{ route('lojas.index') }}" :active="request()->routeIs('lojas.index')">
+                        {{ __('Lojas') }}
+                    </x-jet-nav-link>
+                </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-jet-nav-link href="{{ route('produtos.index') }}" :active="request()->routeIs('produtos.index')">
+                        {{ __('Produtos') }}
                     </x-jet-nav-link>
                 </div>
             </div>
@@ -140,6 +158,24 @@
         <div class="pt-2 pb-3 space-y-1">
             <x-jet-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
+            </x-jet-responsive-nav-link>
+        </div>
+
+        <div class="pt-2 pb-3 space-y-1">
+            <x-jet-responsive-nav-link href="{{ route('usuarios.index') }}" :active="request()->routeIs('usuarios.index')">
+                {{ __('Usuarios') }}
+            </x-jet-responsive-nav-link>
+        </div>
+
+        <div class="pt-2 pb-3 space-y-1">
+            <x-jet-responsive-nav-link href="{{ route('lojas.index') }}" :active="request()->routeIs('lojas.index')">
+                {{ __('Lojas') }}
+            </x-jet-responsive-nav-link>
+        </div>
+
+        <div class="pt-2 pb-3 space-y-1">
+            <x-jet-responsive-nav-link href="{{ route('produtos.index') }}" :active="request()->routeIs('produtos.index')">
+                {{ __('Produtos') }}
             </x-jet-responsive-nav-link>
         </div>
 
