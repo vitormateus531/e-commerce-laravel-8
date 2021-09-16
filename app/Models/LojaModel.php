@@ -22,13 +22,4 @@ class LojaModel extends Model
         'id_user'
     ];
 
-     
-    /**
-     * consegue consegue os produtos da loja.
-     */
-    public function getProdutos()
-    {
-        return $this->belongsToMany(ProdutosModel::class, 'loja_produtos', 'loja_id', 'produtos_id')
-            ->withTimestamps();
-    }
 }

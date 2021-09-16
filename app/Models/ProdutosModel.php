@@ -19,6 +19,7 @@ class ProdutosModel extends Model
     protected $fillable = [ 
         'nome',
         'codigo',
-        'valor'
+        'valor',
+        'id_loja'
     ];
 }
