@@ -7,7 +7,7 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <a class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded">
+            <a class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded" href="{{route('lojas.create')}}">
                 Cadastrar Loja
             </a>
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg overflow-x-auto mt-6">
@@ -20,18 +20,19 @@
                         </tr>
                     </thead>
                     <tbody class="text-gray-600 text-sm font-light">
+                        @foreach($lojas as $loja)
                         <tr class="border-b border-gray-200 hover:bg-gray-100">
                             <td class="py-3 px-6 text-left whitespace-nowrap">
                                 <div class="flex items-center">
                                     <div class="mr-2">
                                         <i class="fas fa-dumpster text-3xl text-green-600"></i>
                                     </div>
-                                    <span class="font-medium">React Project</span>
+                                    <span class="font-medium">{{$loja->nome}}</span>
                                 </div>
                             </td>
                             <td class="py-3 px-6 text-left">
                                 <div class="flex items-center">
-                                    <span>Eshal Rosas</span>
+                                    <span>{{$loja->endereco}}</span>
                                 </div>
                             </td>
                             <td class="py-3 px-6 text-center">
@@ -55,9 +56,12 @@
                                 </div>
                             </td>
                         </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
+            <x-alert />
         </div>
+        
     </div>
 </x-app-layout>

@@ -13,6 +13,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        
+        // Seeders para serem usados em ambiente de Teste
+        $this->call([
+            CargosSeeder::class
+        ]);
     }
 }

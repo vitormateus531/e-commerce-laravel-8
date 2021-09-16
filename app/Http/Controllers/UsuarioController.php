@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CargosModel;
+use App\Models\LojaModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UsuarioController extends Controller
 {
+    
     //
         //
     /**
@@ -25,7 +29,10 @@ class UsuarioController extends Controller
      */
     public function create()
     {
-        return view('usuarios.create');
+        $user = Auth::user()->id;
+        $cargos = CargosModel::all();
+        $lojas = LojaModel::where('id_user', $user)->get();
+        return view('usuarios.create',compact('cargos','lojas'));
     }
 
     /**
@@ -36,7 +43,7 @@ class UsuarioController extends Controller
      */
     public function store(Request $request)
     {
-
+        dd('cadastrou usuario');
     }
 
     /**

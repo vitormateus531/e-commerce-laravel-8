@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\LojaModel;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LojaController extends Controller
 {
@@ -14,7 +17,9 @@ class LojaController extends Controller
      */
     public function index()
     {
-        return view('loja.index');
+        $usuario = Auth::user()->id;
+        $lojas = LojaModel::where('id_user', $usuario)->get();
+        return view('loja.index',compact('lojas'));
     }
 
     /**
@@ -24,7 +29,7 @@ class LojaController extends Controller
      */
     public function create()
     {
-    
+        return view('loja.create');
     }
 
     /**
@@ -35,6 +40,18 @@ class LojaController extends Controller
      */
     public function store(Request $request)
     {
+        try{
+            $usuario = Auth::user()->id;
+
+            $cadastrarLojas = new LojaModel;
+            $cadastrarLojas->nome = $request->input('nome');
+            $cadastrarLojas->endereco = $request->input('endereco');
+            $cadastrarLojas->id_user = $usuario;
+            $cadastrarLojas->save();
+            return redirect()->route('lojas.index')->with('sucesso', 'Loja inserida com sucesso!');
+        }catch(Exception $e){
+            return redirect()->route('lojas.index')->with('error', $e->getMessage());
+        }
 
     }
 
