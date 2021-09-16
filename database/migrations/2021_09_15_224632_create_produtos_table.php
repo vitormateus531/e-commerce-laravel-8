@@ -22,7 +22,6 @@ class CreateProdutosTable extends Migration
             $table->comment = 'Tabela de produtos da loja';
 
             $table->id();
-            $table->text('imagem');
             $table->text('nome');
             $table->text('codigo');
             $table->double('valor', 8, 2);

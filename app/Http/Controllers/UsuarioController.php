@@ -7,7 +7,7 @@ use App\Models\FuncionarioModel;
 use App\Models\LojaModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Exception;
+use PDOException;
 
 class UsuarioController extends Controller
 {
@@ -36,9 +36,9 @@ class UsuarioController extends Controller
      */
     public function create()
     {
-        $user = Auth::user()->id;
+        $usuario = Auth::user()->id;
         $cargos = CargosModel::all();
-        $lojas = LojaModel::where('id_user', $user)->get();
+        $lojas = LojaModel::where('id_user', $usuario)->get();
         return view('usuarios.create',compact('cargos','lojas'));
     }
 
@@ -62,7 +62,7 @@ class UsuarioController extends Controller
 
             return redirect()->route('usuarios.index')->with('sucesso', 'usuário cadastrado com sucesso!');
 
-        }catch(Exception $e){
+        }catch(PDOException $e){
             return redirect()->route('usuarios.index')->with('error', $e->getMessage());
         }
     }

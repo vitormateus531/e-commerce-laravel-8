@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\LojaModel;
-use Exception;
+use PDOexception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -49,7 +49,7 @@ class LojaController extends Controller
             $cadastrarLojas->id_user = $usuario;
             $cadastrarLojas->save();
             return redirect()->route('lojas.index')->with('sucesso', 'Loja inserida com sucesso!');
-        }catch(Exception $e){
+        }catch(PDOexception $e){
             return redirect()->route('lojas.index')->with('error', $e->getMessage());
         }
 

@@ -22,28 +22,29 @@
                         </tr>
                     </thead>
                     <tbody class="text-gray-600 text-sm font-light">
+                        @foreach($produtos as $produto)
                         <tr class="border-b border-gray-200 hover:bg-gray-100">
                             <td class="py-3 px-6 text-left whitespace-nowrap">
                                 <div class="flex items-center">
                                     <div class="mr-2">
                                         <i class="fas fa-shopping-basket text-3xl text-gray-600"></i>
                                     </div>
-                                    <span class="font-medium">React Project</span>
+                                    <span class="font-medium">{{$produto->nome}}</span>
                                 </div>
                             </td>
                             <td class="py-3 px-6 text-left">
                                 <div class="flex items-center">
-                                    <span>Eshal Rosas</span>
+                                    <span>{{$produto->codigo}}</span>
                                 </div>
                             </td>
                             <td class="py-3 px-6 text-center">
                                 <div class="flex items-center">
-                                    <span>Eshal Rosas</span>
+                                    <span>{{number_format($produto->valor,2,',','.')}}</span>
                                 </div>
                             </td>
                             <td class="py-3 px-6 text-center">
                                 <div class="flex items-center">
-                                    <span>Eshal Rosas</span>
+                                    <span>{{$produto->loja_nome}}</span>
                                 </div>
                             </td>
                             <td class="py-3 px-6 text-center">
@@ -67,9 +68,11 @@
                                 </div>
                             </td>
                         </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
+            <x-alert />
         </div>
     </div>
 </x-app-layout>
