@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\CargosModel;
+use App\Models\FuncionarioModel;
 use App\Models\LojaModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Exception;
 
 class UsuarioController extends Controller
 {
@@ -19,7 +21,12 @@ class UsuarioController extends Controller
      */
     public function index()
     {
-        return view('usuarios.index');
+        $usuario = Auth::user()->id;
+        $funcionarios = FuncionarioModel::select('funcionarios.id as id','funcionarios.nome','funcionarios.email','loja.nome as loja_nome','cargos.nome as cargo_nome')
+        ->join('cargos','funcionarios.id_cargo','cargos.id')
+        ->join('loja','funcionarios.id_loja','loja.id')->where('loja.id_user', $usuario)->get();
+        
+        return view('usuarios.index',compact('funcionarios'));
     }
 
     /**
@@ -43,7 +50,21 @@ class UsuarioController extends Controller
      */
     public function store(Request $request)
     {
-        dd('cadastrou usuario');
+        try{
+            
+            $cadastrarUsuario = new FuncionarioModel;
+            $cadastrarUsuario->nome = $request->input('nome');
+            $cadastrarUsuario->sobrenome = $request->input('sobrenome');
+            $cadastrarUsuario->email = $request->input('email');
+            $cadastrarUsuario->id_cargo = $request->input('cargo');
+            $cadastrarUsuario->id_loja = $request->input('loja');
+            $cadastrarUsuario->save();
+
+            return redirect()->route('usuarios.index')->with('sucesso', 'usuário cadastrado com sucesso!');
+
+        }catch(Exception $e){
+            return redirect()->route('usuarios.index')->with('error', $e->getMessage());
+        }
     }
 
     /**
