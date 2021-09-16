@@ -63,7 +63,8 @@ class LojaController extends Controller
      */
     public function show($id)
     {
-
+        $loja = LojaModel::where('id', $id)->first();
+        return view('loja.show',compact('loja'));
     }
 
     /**
