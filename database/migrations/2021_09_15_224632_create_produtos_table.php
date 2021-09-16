@@ -21,13 +21,18 @@ class CreateProdutosTable extends Migration
             $table->collation = 'utf8_unicode_ci';
             $table->comment = 'Tabela de produtos da loja';
 
-
-
             $table->id();
+            $table->text('imagem');
             $table->text('nome');
             $table->text('codigo');
             $table->double('valor', 8, 2);
+
+            $table->unsignedBigInteger('id_loja');
+            $table->foreign('id_loja')->references('id')->on('loja');
+
             $table->timestamps();
+
+
         });
     }
 
