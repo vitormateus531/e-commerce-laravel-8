@@ -7,7 +7,7 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <a class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded">
+            <a class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded" href="{{route('produtos.create')}}">
                 Cadastrar Produto
             </a>
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg overflow-x-auto mt-6">

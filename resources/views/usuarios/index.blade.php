@@ -39,7 +39,7 @@
                             </td>
                             <td class="py-3 px-6 text-center">
                                 <div class="flex items-center">
-                                    <span>{{$funcionario->nome_loja}}</span>
+                                    <span>{{$funcionario->loja_nome}}</span>
                                 </div>
                             </td>
                             <td class="py-3 px-6 text-center">
