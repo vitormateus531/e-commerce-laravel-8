@@ -7,8 +7,8 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <a class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded" href="{{route('usuarios.create',['loja' => $loja->id])}}">
-                Cadastrar Usuario
+            <a class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded" href="{{route('funcionarios.create',['loja' => $loja->id])}}">
+                Cadastrar Funcionário
             </a>
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg overflow-x-auto mt-6">
                 <table class="min-w-max w-full table-auto">
@@ -50,7 +50,7 @@
                             <td class="py-3 px-6 text-center">
                                 <div class="flex item-center justify-center">
                                     <div class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
-                                        <a href="{{route('usuarios.edit',['usuario' => $funcionario->id,'loja' => $loja->id])}}">
+                                        <a href="{{route('funcionarios.edit',['funcionario' => $funcionario->id,'loja' => $loja->id])}}">
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
                                             </svg>
@@ -58,14 +58,14 @@
                                     </div>
 
                                     <div class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
-                                        <a onclick="document.getElementById('remove_funcionario').submit()" class="cursor-pointer">
+                                        <a onclick="document.getElementById('remove_funcionario{{$funcionario->id}}').submit()" class="cursor-pointer">
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                                             </svg>
                                         </a>
                                     </div>
                                 </div>
-                                <form id="remove_funcionario" method="POST" action="{{route('usuarios.destroy',['usuario' => $funcionario->id,'loja' => $loja->id])}}" >
+                                <form id="remove_funcionario{{$funcionario->id}}" method="POST" action="{{route('funcionarios.destroy',['funcionario' => $funcionario->id,'loja' => $loja->id])}}" >
                                     @csrf
                                     @method('DELETE')
                                 </form>

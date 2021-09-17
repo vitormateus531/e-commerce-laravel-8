@@ -9,11 +9,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use PDOException;
 
-class UsuarioController extends Controller
+class FuncionariosController extends Controller
 {
-    
+    //  //
     //
-        //
     /**
      * Display a listing of the resource.
      *
@@ -22,14 +21,14 @@ class UsuarioController extends Controller
     public function index(Request $request)
     {
         $usuario = Auth::user()->id;
-        $loja = LojaModel::where('id',$request->loja)->first();
-        $funcionarios = FuncionarioModel::select('funcionarios.id as id','funcionarios.nome','funcionarios.email','loja.nome as loja_nome','cargos.nome as cargo_nome')
-        ->join('cargos','funcionarios.id_cargo','cargos.id')
-        ->join('loja','funcionarios.id_loja','loja.id')
-        ->where('loja.id_user', $usuario)
-        ->where('funcionarios.id_loja',$loja->id)->get();
-        
-        return view('usuarios.index',compact('funcionarios','loja'));
+        $loja = LojaModel::where('id', $request->loja)->first();
+        $funcionarios = FuncionarioModel::select('funcionarios.id as id', 'funcionarios.nome', 'funcionarios.email', 'loja.nome as loja_nome', 'cargos.nome as cargo_nome')
+            ->join('cargos', 'funcionarios.id_cargo', 'cargos.id')
+            ->join('loja', 'funcionarios.id_loja', 'loja.id')
+            ->where('loja.id_user', $usuario)
+            ->where('funcionarios.id_loja', $loja->id)->get();
+
+        return view('funcionarios.index', compact('funcionarios', 'loja'));
     }
 
     /**
@@ -42,7 +41,7 @@ class UsuarioController extends Controller
         $usuario = Auth::user()->id;
         $cargos = CargosModel::all();
         $loja = LojaModel::where('id_user', $usuario)->where('id', $request->loja)->first();
-        return view('usuarios.create',compact('cargos','loja'));
+        return view('funcionarios.create', compact('cargos', 'loja'));
     }
 
     /**
@@ -53,8 +52,8 @@ class UsuarioController extends Controller
      */
     public function store(Request $request)
     {
-        try{
-            
+        try {
+
             $cadastrarUsuario = new FuncionarioModel;
             $cadastrarUsuario->nome = $request->input('nome');
             $cadastrarUsuario->sobrenome = $request->input('sobrenome');
@@ -63,10 +62,9 @@ class UsuarioController extends Controller
             $cadastrarUsuario->id_loja = $request->input('loja');
             $cadastrarUsuario->save();
 
-            return redirect()->route('usuarios.index',['loja' => $request->input('loja')])->with('sucesso', 'usuário cadastrado com sucesso!');
-
-        }catch(PDOException $e){
-            return redirect()->route('usuarios.index',['loja' => $request->input('loja')])->with('error', $e->getMessage());
+            return redirect()->route('funcionarios.index', ['loja' => $request->input('loja')])->with('sucesso', 'usuário cadastrado com sucesso!');
+        } catch (PDOException $e) {
+            return redirect()->route('funcionarios.index', ['loja' => $request->input('loja')])->with('error', $e->getMessage());
         }
     }
 
@@ -81,7 +79,7 @@ class UsuarioController extends Controller
         $loja = LojaModel::where('id', $request->loja)->first();
         $funcionario = FuncionarioModel::where('id', $id)->first();
         $cargos = CargosModel::all();
-        return view('usuarios.edit', compact('funcionario','cargos','loja'));
+        return view('funcionarios.edit', compact('funcionario', 'cargos', 'loja'));
     }
 
     /**
@@ -94,7 +92,7 @@ class UsuarioController extends Controller
     public function update(Request $request, $id)
     {
 
-        try{
+        try {
             $atualizarFuncionario = FuncionarioModel::find($id);
             $atualizarFuncionario->nome = $request->input('nome');
             $atualizarFuncionario->sobrenome = $request->input('sobrenome');
@@ -102,10 +100,9 @@ class UsuarioController extends Controller
             $atualizarFuncionario->id_cargo = $request->input('cargo');
             $atualizarFuncionario->save();
 
-            return redirect()->route('usuarios.index',['loja' => $request->input('loja')])->with('sucesso', 'funcionário atualizado com sucesso!');
-
-        }catch(PDOException $e){
-            return redirect()->route('usuarios.index',['loja' => $request->input('loja')])->with('error', $e->getMessage());
+            return redirect()->route('funcionarios.index', ['loja' => $request->input('loja')])->with('sucesso', 'funcionário atualizado com sucesso!');
+        } catch (PDOException $e) {
+            return redirect()->route('funcionarios.index', ['loja' => $request->input('loja')])->with('error', $e->getMessage());
         }
     }
 
@@ -117,13 +114,13 @@ class UsuarioController extends Controller
      */
     public function destroy(Request $request, $id)
     {
-        try{
+        try {
             $removerFuncionario = FuncionarioModel::find($id);
             $removerFuncionario->delete();
 
-            return redirect()->route('usuarios.index',['loja' => $request->loja])->with('sucesso', 'funcionário removido com sucesso!');
-        }catch(PDOException $e){
-            return redirect()->route('usuarios.index',['loja' => $request->loja])->with('error', $e->getMessage());
+            return redirect()->route('funcionarios.index', ['loja' => $request->loja])->with('sucesso', 'funcionário removido com sucesso!');
+        } catch (PDOException $e) {
+            return redirect()->route('funcionarios.index', ['loja' => $request->loja])->with('error', $e->getMessage());
         }
     }
 }

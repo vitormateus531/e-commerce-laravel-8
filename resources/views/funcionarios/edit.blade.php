@@ -8,7 +8,7 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg overflow-x-auto mt-6 p-10">
-                <form method="POST" action="{{route('usuarios.update', $funcionario->id)}}">
+                <form method="POST" action="{{route('funcionarios.update', $funcionario->id)}}">
                     @csrf
                     @method('PUT')
                     <input name="loja" type="hidden" value="{{$loja->id}}" />
@@ -52,7 +52,7 @@
                             <button type="submit" class="shadow bg-blue-500 hover:bg-blue-600 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" type="button">
                                 Atualizar
                             </button>
-                            <button type="button" class="shadow bg-gray-500 hover:bg-gray-600 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" onclick="window.location='/usuarios?loja={{$loja->id}}'">
+                            <button type="button" class="shadow bg-gray-500 hover:bg-gray-600 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" onclick="window.location='/funcionarios?loja={{$loja->id}}'">
                                 Voltar
                             </button>
                         </div>

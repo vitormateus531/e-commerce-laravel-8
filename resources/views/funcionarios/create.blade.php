@@ -8,7 +8,7 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg overflow-x-auto mt-6 p-10">
-                <form method="POST" action="{{route('usuarios.store')}}">
+                <form method="POST" action="{{route('funcionarios.store')}}">
                     @csrf
                     <input type="hidden" value="{{$loja->id}}" name="loja" />
                     <div class="flex flex-wrap -mx-3 mb-6">
@@ -51,7 +51,7 @@
                             <button type="submit" class="shadow bg-blue-500 hover:bg-blue-600 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" type="button">
                                 Cadastrar
                             </button>
-                            <button type="button" class="shadow bg-gray-500 hover:bg-gray-600 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" onclick="window.location='/usuarios?loja={{$loja->id}}'">
+                            <button type="button" class="shadow bg-gray-500 hover:bg-gray-600 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" onclick="window.location='/funcionarios?loja={{$loja->id}}'">
                                 Voltar
                             </button>
                         </div>

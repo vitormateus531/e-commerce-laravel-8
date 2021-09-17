@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\FuncionariosController;
 use App\Http\Controllers\LojaController;
 use App\Http\Controllers\ProdutoController;
 use App\Http\Controllers\UsuarioController;
@@ -24,7 +25,7 @@ Route::get('/', function () {
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
     Route::get('/dashboard', [DashboardController::class, 'view'])->name('dashboard');
-    Route::resource('usuarios', UsuarioController::class);
+    Route::resource('funcionarios', FuncionariosController::class);
     Route::resource('lojas', LojaController::class);
     Route::resource('produtos', ProdutoController::class);
 

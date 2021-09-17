@@ -110,7 +110,6 @@ class ProdutoController extends Controller
     public function destroy(Request $request, $id)
     {
         try{
-            
             $removerProduto = ProdutosModel::find($id);
             $removerProduto->delete();
 
