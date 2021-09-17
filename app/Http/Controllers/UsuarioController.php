@@ -71,17 +71,6 @@ class UsuarioController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Kernel\KrStatusRecord  $krStatusRecord
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\Kernel\KrStatusRecord  $krStatusRecord
@@ -126,8 +115,15 @@ class UsuarioController extends Controller
      * @param  \App\Models\Kernel\KrStatusRecord  $krStatusRecord
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
+        try{
+            $removerFuncionario = FuncionarioModel::find($id);
+            $removerFuncionario->delete();
 
+            return redirect()->route('usuarios.index',['loja' => $request->loja])->with('sucesso', 'funcionário removido com sucesso!');
+        }catch(PDOException $e){
+            return redirect()->route('usuarios.index',['loja' => $request->loja])->with('error', $e->getMessage());
+        }
     }
 }
