@@ -13,7 +13,6 @@
    * [Instalação](#instalacao)
       * [Pré Requisitos](#pre_requsito)
       * [Preparando aplicação](#preparando_aplicacao)
-   * [Demo da aplicação](#demo)
 <!--te-->
 
 <h2 id="instalacao">Instalação</h2>
