@@ -1,11 +1,11 @@
-<h1 align="center"> Agenda de Contatos com Laravel Jetstream </h1>
+<h1 align="center">Sistema de Gerenciamento de lojas (SGL)</h1>
 
 <p align="center"><img src="https://laravelnews.imgix.net/images/jetstream.png?ixlib=php-3.3.0" width="500"></p>
 
 <img src="https://img.shields.io/static/v1?label=Status&message=Concluido&color=54CD26&style=for-the-badge&logo=ghost"/>
 
 ## Descrição do Projeto
-<p align="justify"> Desenvolver uma plataforma capaz de guardar contatos pessoais ou profissionais do usuário, possibilitando o fácil e seguro acesso a eles.</p>
+<p align="justify">Uma aplicação com funcionalidades básicas de gerenciamento onde o usuário poderá cadastrar suas lojas,funcionáros e produtos.</p>
 
 ## Tópicos
 
@@ -42,18 +42,15 @@
     DB_CONNECTION=mysql
     DB_HOST=127.0.0.1
     DB_PORT=3306
-    DB_DATABASE=database_agenda
+    DB_DATABASE=e-commerce
     DB_USERNAME=root
     DB_PASSWORD=
     ```
 - Fazendo isso use o comando `php artisan migrate` para gerar todas as tabelas no banco que a aplicação utilizará
+- E ultilize também o comando `php artisan db:seed` para gerar todas as seeders necessárias para o projeto
 
 - Execute a aplicação com o comando:
 
     `php artisan serve`
 
 - Por padrão, ele irá executar a aplicação em `localhost:8000`, abra o navegador e digite o caminho.
-
-<h2 id="demo">Demo da aplicação</h2>
- 
- - <a href="https://www.tagsolution.com.br/teste_masterix/public">Veja aqui o demo da aplicação</a>
