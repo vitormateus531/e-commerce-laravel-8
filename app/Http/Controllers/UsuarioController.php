@@ -87,9 +87,12 @@ class UsuarioController extends Controller
      * @param  \App\Models\Kernel\KrStatusRecord  $krStatusRecord
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
-
+        $loja = LojaModel::where('id', $request->loja)->first();
+        $funcionario = FuncionarioModel::where('id', $id)->first();
+        $cargos = CargosModel::all();
+        return view('usuarios.edit', compact('funcionario','cargos','loja'));
     }
 
     /**
@@ -102,7 +105,19 @@ class UsuarioController extends Controller
     public function update(Request $request, $id)
     {
 
+        try{
+            $atualizarFuncionario = FuncionarioModel::find($id);
+            $atualizarFuncionario->nome = $request->input('nome');
+            $atualizarFuncionario->sobrenome = $request->input('sobrenome');
+            $atualizarFuncionario->email = $request->input('email');
+            $atualizarFuncionario->id_cargo = $request->input('cargo');
+            $atualizarFuncionario->save();
 
+            return redirect()->route('usuarios.index',['loja' => $request->input('loja')])->with('sucesso', 'funcionário atualizado com sucesso!');
+
+        }catch(PDOException $e){
+            return redirect()->route('usuarios.index',['loja' => $request->input('loja')])->with('error', $e->getMessage());
+        }
     }
 
     /**
