@@ -45,7 +45,7 @@
     DB_USERNAME=root
     DB_PASSWORD=
     ```
-- Fazendo isso use o comando `php artisan migrate` para gerar todas as tabelas no banco que a aplicação utilizará
+- Fazendo isso use o comando `php artisan migrate` para gerar todas as tabelas no banco que a aplicação precisará
 - E ultilize também o comando `php artisan db:seed` para gerar todas as seeders necessárias para o projeto
 
 - Execute a aplicação com o comando:
