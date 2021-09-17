@@ -75,7 +75,9 @@ class LojaController extends Controller
      */
     public function edit($id)
     {
-
+        $usuario = Auth::user()->id;
+        $loja = LojaModel::where('id_user', $usuario)->where('id', $id)->first();
+        return view('loja.edit',compact('loja'));
     }
 
     /**
@@ -87,7 +89,17 @@ class LojaController extends Controller
      */
     public function update(Request $request, $id)
     {
+        try{
+            
+            $atualizarLoja = LojaModel::find($id);
+            $atualizarLoja->nome = $request->input('nome');
+            $atualizarLoja->endereco = $request->input('endereco');
+            $atualizarLoja->save();
 
+            return redirect()->route('lojas.index')->with('sucesso', 'Loja atualizada com sucesso!');
+        }catch(PDOexception $e){
+            return redirect()->route('lojas.index')->with('error', $e->getMessage());
+        }
 
     }
 
