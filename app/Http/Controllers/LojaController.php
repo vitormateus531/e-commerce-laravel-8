@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\FuncionarioModel;
 use App\Models\LojaModel;
+use App\Models\ProdutosModel;
 use PDOexception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class LojaController extends Controller
 {
@@ -19,7 +22,7 @@ class LojaController extends Controller
     {
         $usuario = Auth::user()->id;
         $lojas = LojaModel::where('id_user', $usuario)->get();
-        return view('loja.index',compact('lojas'));
+        return view('loja.index', compact('lojas'));
     }
 
     /**
@@ -40,7 +43,7 @@ class LojaController extends Controller
      */
     public function store(Request $request)
     {
-        try{
+        try {
             $usuario = Auth::user()->id;
 
             $cadastrarLojas = new LojaModel;
@@ -49,10 +52,9 @@ class LojaController extends Controller
             $cadastrarLojas->id_user = $usuario;
             $cadastrarLojas->save();
             return redirect()->route('lojas.index')->with('sucesso', 'Loja inserida com sucesso!');
-        }catch(PDOexception $e){
+        } catch (PDOexception $e) {
             return redirect()->route('lojas.index')->with('error', $e->getMessage());
         }
-
     }
 
     /**
@@ -64,7 +66,7 @@ class LojaController extends Controller
     public function show($id)
     {
         $loja = LojaModel::where('id', $id)->first();
-        return view('loja.show',compact('loja'));
+        return view('loja.show', compact('loja'));
     }
 
     /**
@@ -77,7 +79,7 @@ class LojaController extends Controller
     {
         $usuario = Auth::user()->id;
         $loja = LojaModel::where('id_user', $usuario)->where('id', $id)->first();
-        return view('loja.edit',compact('loja'));
+        return view('loja.edit', compact('loja'));
     }
 
     /**
@@ -89,18 +91,17 @@ class LojaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        try{
-            
+        try {
+
             $atualizarLoja = LojaModel::find($id);
             $atualizarLoja->nome = $request->input('nome');
             $atualizarLoja->endereco = $request->input('endereco');
             $atualizarLoja->save();
 
             return redirect()->route('lojas.index')->with('sucesso', 'Loja atualizada com sucesso!');
-        }catch(PDOexception $e){
+        } catch (PDOexception $e) {
             return redirect()->route('lojas.index')->with('error', $e->getMessage());
         }
-
     }
 
     /**
@@ -111,6 +112,26 @@ class LojaController extends Controller
      */
     public function destroy($id)
     {
+        try {
+            DB::transaction(function () use ($id) {
+                
+                $removerProdutosLoja = ProdutosModel::where('id_loja', $id)->get();
+                foreach ($removerProdutosLoja as $removerProdutos) {
+                    $removerProdutos->delete();
+                }
 
+                $removerFuncionariosLoja = FuncionarioModel::where('id_loja', $id)->get();
+                foreach ($removerFuncionariosLoja as $removerFuncionarios) {
+                    $removerFuncionarios->delete();
+                }
+
+                $removerLoja = LojaModel::find($id);
+                $removerLoja->delete();
+            });
+
+            return redirect()->route('lojas.index')->with('sucesso', 'Loja removida com sucesso!');
+        } catch (PDOexception $e) {
+            return redirect()->route('lojas.index')->with('error', $e->getMessage());
+        }
     }
 }
