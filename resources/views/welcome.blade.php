@@ -35,8 +35,8 @@
         @endif
 
         <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
-            <h1>Sistema de gerenciamento de e-commerces (SGE)</h1>
-            <lottie-player src="https://assets4.lottiefiles.com/packages/lf20_yfzqf50z.json" background="transparent" speed="1" style="margin-left:240px; width: 300px; height: 300px;" loop autoplay></lottie-player>
+            <h1>Sistema de gerenciamento de lojas (SGL)</h1>
+            <lottie-player src="https://assets4.lottiefiles.com/packages/lf20_yfzqf50z.json" background="transparent" speed="1" style="margin-left:200px; width: 300px; height: 300px;" loop autoplay></lottie-player>
         </div>
     </div>
 </body>
