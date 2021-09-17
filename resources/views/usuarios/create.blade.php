@@ -42,7 +42,7 @@
                                 @foreach($cargos as $cargo)
                                 <option value="{{$cargo->id}}">{{$cargo->nome}}</option>
                                 @endforeach
-                            </select>                            
+                            </select>
                         </div>
                     </div>
 
@@ -50,6 +50,9 @@
                         <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                             <button type="submit" class="shadow bg-blue-500 hover:bg-blue-600 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" type="button">
                                 Cadastrar
+                            </button>
+                            <button type="button" class="shadow bg-gray-500 hover:bg-gray-600 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" onclick="window.location='/usuarios?loja={{$loja->id}}'">
+                                Voltar
                             </button>
                         </div>
                     </div>

@@ -1,4 +1,4 @@
-<div>
+<div class="pb-10">
     @if(Session::has('sucesso'))
     <div class="mt-10 bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
         <strong class="font-bold">Sucesso!</strong>
