@@ -17,10 +17,14 @@ class ProdutoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $usuario = Auth::user()->id;
         $produtos = ProdutosModel::select('produtos.id','produtos.nome','produtos.codigo','produtos.valor','loja.nome as loja_nome')
-        ->join('loja','produtos.id_loja','loja.id')->get();
+        ->join('loja','produtos.id_loja','loja.id')
+        ->where('produtos.id_loja',$request->loja)
+        ->where('loja.id_user', $usuario)
+        ->get();
 
         return view('produtos.index',compact('produtos'));
     }

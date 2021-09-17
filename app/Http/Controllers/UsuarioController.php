@@ -19,12 +19,14 @@ class UsuarioController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $usuario = Auth::user()->id;
         $funcionarios = FuncionarioModel::select('funcionarios.id as id','funcionarios.nome','funcionarios.email','loja.nome as loja_nome','cargos.nome as cargo_nome')
         ->join('cargos','funcionarios.id_cargo','cargos.id')
-        ->join('loja','funcionarios.id_loja','loja.id')->where('loja.id_user', $usuario)->get();
+        ->join('loja','funcionarios.id_loja','loja.id')
+        ->where('loja.id_user', $usuario)
+        ->where('funcionarios.id_loja',$request->loja)->get();
         
         return view('usuarios.index',compact('funcionarios'));
     }
