@@ -55,7 +55,7 @@ class ProdutoController extends Controller
             $cadastrarProduto = new ProdutosModel;
             $cadastrarProduto->nome = $request->input('nome');
             $cadastrarProduto->codigo = $request->input('codigo');
-            $cadastrarProduto->valor = $request->input('valor');
+            $cadastrarProduto->valor = str_replace(',','',$request->input('valor'));
             $cadastrarProduto->id_loja = $request->input('loja');
             $cadastrarProduto->save();
 
@@ -92,7 +92,7 @@ class ProdutoController extends Controller
             $atualizarProduto = ProdutosModel::find($id);
             $atualizarProduto->nome = $request->input('nome');
             $atualizarProduto->codigo = $request->input('codigo');
-            $atualizarProduto->valor = $request->input('valor');
+            $atualizarProduto->valor = str_replace(',','',$request->input('valor'));
             $atualizarProduto->save();
 
             return redirect()->route('produtos.index',['loja' => $request->loja])->with('sucesso', 'produto atualizado com sucesso!');
