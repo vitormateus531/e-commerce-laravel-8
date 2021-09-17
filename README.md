@@ -1,6 +1,6 @@
 <h1 align="center">Sistema de Gerenciamento de lojas (SGL)</h1>
 
-<p align="center"><img src="public/img/projeto.png" width="500"></p>
+<p align="center"><img src="public/img/new_projeto.png" width="500"></p>
 
 <img src="https://img.shields.io/static/v1?label=Status&message=Concluido&color=54CD26&style=for-the-badge&logo=ghost"/>
 
