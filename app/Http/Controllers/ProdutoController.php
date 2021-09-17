@@ -20,13 +20,14 @@ class ProdutoController extends Controller
     public function index(Request $request)
     {
         $usuario = Auth::user()->id;
+        $loja = LojaModel::where('id',$request->loja)->first();
         $produtos = ProdutosModel::select('produtos.id','produtos.nome','produtos.codigo','produtos.valor','loja.nome as loja_nome')
         ->join('loja','produtos.id_loja','loja.id')
-        ->where('produtos.id_loja',$request->loja)
+        ->where('produtos.id_loja', $loja->id)
         ->where('loja.id_user', $usuario)
         ->get();
 
-        return view('produtos.index',compact('produtos'));
+        return view('produtos.index',compact('produtos','loja'));
     }
 
     /**
@@ -34,11 +35,11 @@ class ProdutoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         $usuario = Auth::user()->id;
-        $lojas = LojaModel::where('id_user', $usuario)->get();
-        return view('produtos.create', compact('lojas'));
+        $loja = LojaModel::where('id_user', $usuario)->where('id',$request->loja)->first();
+        return view('produtos.create', compact('loja'));
     }
 
     /**
@@ -58,9 +59,9 @@ class ProdutoController extends Controller
             $cadastrarProduto->id_loja = $request->input('loja');
             $cadastrarProduto->save();
 
-            return redirect()->route('produtos.index')->with('sucesso', 'produto cadastrado com sucesso!');
+            return redirect()->route('produtos.index',['loja' => $request->input('loja')])->with('sucesso', 'produto cadastrado com sucesso!');
         } catch (PDOexception $e) {
-            return redirect()->route('produtos.index')->with('error', $e->getMessage());
+            return redirect()->route('produtos.index',['loja' => $request->input('loja')])->with('error', $e->getMessage());
         }
     }
 

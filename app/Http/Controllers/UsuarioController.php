@@ -22,13 +22,14 @@ class UsuarioController extends Controller
     public function index(Request $request)
     {
         $usuario = Auth::user()->id;
+        $loja = LojaModel::where('id',$request->loja)->first();
         $funcionarios = FuncionarioModel::select('funcionarios.id as id','funcionarios.nome','funcionarios.email','loja.nome as loja_nome','cargos.nome as cargo_nome')
         ->join('cargos','funcionarios.id_cargo','cargos.id')
         ->join('loja','funcionarios.id_loja','loja.id')
         ->where('loja.id_user', $usuario)
-        ->where('funcionarios.id_loja',$request->loja)->get();
+        ->where('funcionarios.id_loja',$loja->id)->get();
         
-        return view('usuarios.index',compact('funcionarios'));
+        return view('usuarios.index',compact('funcionarios','loja'));
     }
 
     /**
@@ -36,12 +37,12 @@ class UsuarioController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         $usuario = Auth::user()->id;
         $cargos = CargosModel::all();
-        $lojas = LojaModel::where('id_user', $usuario)->get();
-        return view('usuarios.create',compact('cargos','lojas'));
+        $loja = LojaModel::where('id_user', $usuario)->where('id', $request->loja)->first();
+        return view('usuarios.create',compact('cargos','loja'));
     }
 
     /**
@@ -62,10 +63,10 @@ class UsuarioController extends Controller
             $cadastrarUsuario->id_loja = $request->input('loja');
             $cadastrarUsuario->save();
 
-            return redirect()->route('usuarios.index')->with('sucesso', 'usuário cadastrado com sucesso!');
+            return redirect()->route('usuarios.index',['loja' => $request->input('loja')])->with('sucesso', 'usuário cadastrado com sucesso!');
 
         }catch(PDOException $e){
-            return redirect()->route('usuarios.index')->with('error', $e->getMessage());
+            return redirect()->route('usuarios.index',['loja' => $request->input('loja')])->with('error', $e->getMessage());
         }
     }
 
