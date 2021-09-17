@@ -81,8 +81,12 @@ class ProdutoController extends Controller
      * @param  \App\Models\Kernel\KrStatusRecord  $krStatusRecord
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
+        $loja = LojaModel::where('id',$request->loja)->first();
+        $produtos = ProdutosModel::where('id', $id)->first();
+
+        return view('produtos.edit', compact('produtos','loja'));
     }
 
     /**
@@ -94,6 +98,17 @@ class ProdutoController extends Controller
      */
     public function update(Request $request, $id)
     {
+        try{
+            $atualizarProduto = ProdutosModel::find($id);
+            $atualizarProduto->nome = $request->input('nome');
+            $atualizarProduto->codigo = $request->input('codigo');
+            $atualizarProduto->valor = $request->input('valor');
+            $atualizarProduto->save();
+
+            return redirect()->route('produtos.index',['loja' => $request->loja])->with('sucesso', 'produto atualizado com sucesso!');
+        }catch(PDOException $e){
+            return redirect()->route('produtos.index',['loja' => $request->loja])->with('error', $e->getMessage());
+        }
     }
 
     /**
@@ -102,7 +117,16 @@ class ProdutoController extends Controller
      * @param  \App\Models\Kernel\KrStatusRecord  $krStatusRecord
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
+        try{
+            
+            $removerProduto = ProdutosModel::find($id);
+            $removerProduto->delete();
+
+            return redirect()->route('produtos.index',['loja' => $request->loja])->with('sucesso', 'produto removido com sucesso!');
+        }catch(PDOexception $e){
+            return redirect()->route('produtos.index',['loja' => $request->loja])->with('error', $e->getMessage());
+        }
     }
 }
