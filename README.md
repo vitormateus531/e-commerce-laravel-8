@@ -5,7 +5,7 @@
 <img src="https://img.shields.io/static/v1?label=Status&message=Concluido&color=54CD26&style=for-the-badge&logo=ghost"/>
 
 ## Descrição do Projeto
-<p align="justify">Uma aplicação com funcionalidades básicas de gerenciamento onde o usuário poderá cadastrar suas lojas,funcionáros e produtos.</p>
+<p align="justify">Uma aplicação com funcionalidades básicas de gerenciamento onde o usuário poderá cadastrar suas lojas, funcionários e produtos.</p>
 
 ## Tópicos
 
