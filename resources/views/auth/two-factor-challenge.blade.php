@@ -1,7 +1,7 @@
 <x-guest-layout>
     <x-jet-authentication-card>
         <x-slot name="logo">
-            @include('auth\logo')
+            @include('auth.logo')
         </x-slot>
 
         <div x-data="{ recovery: false }">
