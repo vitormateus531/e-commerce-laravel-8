@@ -74,7 +74,7 @@
                 </table>
             </div>
             <x-alert />
-            <button type="button" class="shadow bg-gray-500 hover:bg-gray-600 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" onclick=redirect("{{route('lojas.show', ['id' => $loja->id])}}") >
+            <button type="button" class="shadow bg-gray-500 hover:bg-gray-600 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" onclick=redirect("{{route('lojas.show', ['loja' => $loja->id])}}") >
                 Voltar
             </button>
         </div>
