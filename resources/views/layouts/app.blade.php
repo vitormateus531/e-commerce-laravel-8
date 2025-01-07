@@ -55,6 +55,10 @@
         $('.money').mask("#,##0.00", {
             reverse: true
         });
+
+        function redirect(url){
+            window.location = url
+        }
     </script>
 </body>
 

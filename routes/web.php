@@ -4,7 +4,6 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FuncionariosController;
 use App\Http\Controllers\LojaController;
 use App\Http\Controllers\ProdutoController;
-use App\Http\Controllers\UsuarioController;
 use Illuminate\Support\Facades\Route;
 
 /*
